@@ -8,14 +8,19 @@ const OUT_PICTURE: &str = "cat_shuffled.png";
 const LOG: &str = "run.log";
 
 fn main() -> Result<()> {
+    use std::time::Instant;
+
+    let start = Instant::now();
+
     init_logger()?;
 
     let run_result = run();
 
     if let Err(e) = &run_result {
-        error!("{:?}", e);
+        error!("{e:?}");
     }
 
+    info!("Program took {:?}.", Instant::now() - start);
     log::logger().flush();
     run_result
 }
