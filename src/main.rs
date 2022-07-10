@@ -13,7 +13,7 @@ fn main() -> Result<()> {
     let run_result = run();
 
     if let Err(e) = &run_result {
-        error!("{}", e);
+        error!("{:?}", e);
     }
 
     log::logger().flush();
