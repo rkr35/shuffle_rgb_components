@@ -40,7 +40,7 @@ fn run() -> Result<()> {
 
     let mut rng = rand::thread_rng();
 
-    for (_, _, pixel) in image.enumerate_pixels_mut() {
+    for pixel in image.pixels_mut() {
         pixel.channels_mut().shuffle(&mut rng);
     }
 
