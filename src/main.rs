@@ -3,7 +3,6 @@ use log::info;
 
 fn main() -> Result<()> {
     init_logger()?;
-    info!("test");
     log::logger().flush();
     Ok(())
 }
@@ -13,6 +12,7 @@ fn init_logger() -> Result<()> {
         ColorChoice, CombinedLogger, ConfigBuilder, LevelFilter, TermLogger, TerminalMode,
         WriteLogger,
     };
+    use std::env;
     use std::fs::File;
     use std::io::BufWriter;
 
@@ -34,6 +34,9 @@ fn init_logger() -> Result<()> {
             ),
             WriteLogger::new(level, config.build(), file),
         ])?;
+
+        let cmd_args: Vec<String> = env::args().collect();
+        info!("Command line arguments: \"{}\"", cmd_args.join(" "));
 
         Ok(())
     } else {
